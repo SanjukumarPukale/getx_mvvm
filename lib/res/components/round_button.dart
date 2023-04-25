@@ -4,7 +4,7 @@ import 'package:getx_mvvm/res/routes/app_exports.dart';
 class RoundButton extends StatelessWidget {
   const RoundButton({ 
     Key? key,
-    this.buttonColor = AppColor.primaryColor,
+    this.buttonColor = AppColor.tealColor,
     this.textColor = AppColor.primaryColor,
     required this.title,
     required this.onPress,

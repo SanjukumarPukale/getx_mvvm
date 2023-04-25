@@ -33,7 +33,8 @@ class NetworkApiService extends BaseApiService {
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:  
-        throw InvalidUrlException('');
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;
       default:
         throw FetchDataException('Error occured while communicating with server '+ response.statusCode.toString());
     }
@@ -43,7 +44,7 @@ class NetworkApiService extends BaseApiService {
   Future<dynamic> postApi(var data, String url) async {
      try {
       final response = await http.post(Uri.parse(url),
-      body: jsonEncode(data)
+      body: data
       ).timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
@@ -51,7 +52,9 @@ class NetworkApiService extends BaseApiService {
     } on TimeoutException {
       throw RequestTimeOut('');
     }
-
+    if (kDebugMode) {
+      print(responseJson);
+    }
     return responseJson;
   }
 }
