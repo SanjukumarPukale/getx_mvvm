@@ -29,6 +29,7 @@ class LoginViewModel extends GetxController {
         Utils.SnackBar('Login', value['error']);
       } else {
          userPreferences.saveUser(UserModel.fromJson(value)).then((value) {
+         Get.delete<LoginViewModel>();    // delete LoginViewModel memory
          Get.toNamed(RouteName.homeView);
          }).onError((error, stackTrace) {
 
